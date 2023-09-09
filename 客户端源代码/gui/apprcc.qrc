@@ -1,0 +1,20 @@
+<RCC>
+  <qresource prefix="pic">
+    <file>pic/Black_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Blue_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Brown_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Cyan_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/glass.png</file>
+    <file>pic/Glass_JE3_BE1.png</file>
+    <file>pic/Glass_JE4_BE2.png</file>
+    <file>pic/Gray_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Green_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Light_Blue_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Light_Gray_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Orange_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Pink_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Purple_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Red_Stained_Glass_JE3_BE3.png</file>
+    <file>pic/Yellow_Stained_Glass_JE3_BE3.png</file>
+  </qresource>
+</RCC>
