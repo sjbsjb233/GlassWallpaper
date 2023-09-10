@@ -1,4 +1,5 @@
 # GlassWallpaper
+![0](/pic/0.png)
 > 本作品荣获 2022年杭州市学生信息素养提升实践活动程序设计项目作品 一等奖
 ## 创作思想（创作背景、目的和意义）
 Windows系统自Vista版本以来就不再提供动态壁纸的支持。但随着科技的进步，电脑硬件逐步升级换代，现在的硬件早已不会因为动态壁纸的运行而卡顿。Glass Wallpaper(以下简称Glass)完美支持Windows 10(x64)系统运行动态桌面壁纸。完善自Windows Vista系统以来无法使用动态壁纸的缺陷，满足人们对电脑桌面的高端DIY美化的需求。
@@ -23,6 +24,7 @@ Glass官方网站：https://glass.sjbsjb.xyz
 ----------
 # Glass客户端和服务端安装部署篇
 
+![0](/pic/0.png)
 ## 客户端:
 测试机环境:
 		系统: Windows 10(x64) 专业版 21H2
@@ -35,9 +37,13 @@ Glass官方网站：https://glass.sjbsjb.xyz
 1.您可以在比赛压缩包中的”客户端”文件夹中找到cuda_10.2.89_win10_network.exe文件,打开并安装它(由于CUDA镜像在境外,下载速度可能有些慢,请耐心等待).您也可以访问英伟达官网
 https://developer.nvidia.com/cuda-10.2-download-archive?target_os=Windows&target_arch=x86_64&target_version=10
 来进行安装,安装程序会自动配置系统PATH环境
+
 ![1](/pic/Glass客户端和服务端安装部署篇/1.png)
+
 2.安装完成后,打开比赛压缩包中”客户端”文件夹中的Setup.exe并按照上面的指示完成Glass客户端安装.您也可以访问Glass官网进行下载安装
+
 ![2](/pic/Glass客户端和服务端安装部署篇/2.png)
+
 3.双击打开桌面图标即可运行
 
 ## 服务端
@@ -59,27 +65,41 @@ https://developer.nvidia.com/cuda-10.2-download-archive?target_os=Windows&target
 部署正片:
 
 1.使用ssh服务登入Centos的root用户(这边用Xshell作为演示) 
+
 ![3](/pic/Glass客户端和服务端安装部署篇/3.png)
+
 ![4](/pic/Glass客户端和服务端安装部署篇/4.png)
+
 2.键入命令
 yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
 来进行宝塔Linux面板的安装,你也可以访问宝塔官网进行下载https://www.bt.cn/
 安装期间可能要键入y来许可安装
 3.安装成功后依据上面的提示,进入面板,并进行验证
+
 ![5](/pic/Glass客户端和服务端安装部署篇/5.png)
+
 4.选择左侧导航栏,软件商店,搜索”mysql”并安装,选择版本为5.5 
+
 ![6](/pic/Glass客户端和服务端安装部署篇/6.png)
+
 5.安装完成后进入左侧导航栏的”数据库”,然后添加数据库,名称glass,用户名glass,密码随意,但你要记着(后面会添加linux的glass用户,与mysql用户是分离的,不要搞混)
+
 ![7](/pic/Glass客户端和服务端安装部署篇/7.png)
+
 6.进入左侧导航栏的安全,然后端口出输入8880,备注随便写点,点放行.然后再同理放行3306端口以便连接Mysql数据库
+
 ![8](/pic/Glass客户端和服务端安装部署篇/8.png)
+
 7.切回xshell,输入命令useradd -d /home/glass -m glass来创建一个名为glass的linux用户
 8.输入passwd glass,然后再键入你想要设置的密码,请记住,此为linux的glass用户,与mysql的glass用户不一样,分离的
 9.完成后,使用命令mysql -h 127.0.0.1 -u glass -p然后键入mysql的glass用户密码
+
 ![9](/pic/Glass客户端和服务端安装部署篇/9.png)
+
 10.输入USE glass; 来进入glass数据库
 11.然后输入
-CREATE TABLE user_info(id int NOT NULL AUTO_INCREMENT,
+
+`CREATE TABLE user_info(id int NOT NULL AUTO_INCREMENT,
 name char(10) NOT NULL,
 fabu_id_ok BOOL NOT NULL,
 zhuce_time DATETIME NOT NULL,
@@ -88,27 +108,27 @@ love_ok BOOL NOT NULL,
 be_guanzhu_id_ok BOOL NOT NULL,
 guanzhu_ok  BOOL NOT NULL,
 head_pic BLOB NULL,
-PRIMARY KEY (id))ENGINE=InnoDB;
+PRIMARY KEY (id))ENGINE=InnoDB;`
 
 
-CREATE TABLE user_key(id INT NOT NULL AUTO_INCREMENT,
+`CREATE TABLE user_key(id INT NOT NULL AUTO_INCREMENT,
 key_1 char(45) NOT NULL,
 email char(25) NOT NULL,
 two_step BOOL NOT NULL,
 tow_step_key char(70) NULL,
-PRIMARY KEY (id))ENGINE=InnoDB;
+PRIMARY KEY (id))ENGINE=InnoDB;`
 
 
 
-CREATE TABLE user_auto(id INT NOT NULL AUTO_INCREMENT,
+`CREATE TABLE user_auto(id INT NOT NULL AUTO_INCREMENT,
 last_time DATETIME NOT NULL,
 last_ip CHAR(20) NOT NULL,
 last_city CHAR(6) NOT NULL,
 cookie CHAR(25) NULL,
 quanxian BOOL NOT NULL,
-PRIMARY KEY (id))ENGINE=InnoDB;
+PRIMARY KEY (id))ENGINE=InnoDB;`
 
-CREATE TABLE ziyuan(id INT NOT NULL AUTO_INCREMENT,
+`CREATE TABLE ziyuan(id INT NOT NULL AUTO_INCREMENT,
 fenlei CHAR(5) NOT NULL,
 fenbianlv CHAR(10) NOT NULL,
 title CHAR(20) NOT NULL,
@@ -122,42 +142,43 @@ way TINYTEXT NOT NULL,
 liulan BLOB NOT NULL,
 sou CHAR(45) NOT NULL,
 PRIMARY KEY (id),
-FULLTEXT(sou))ENGINE=MyISAM;
+FULLTEXT(sou))ENGINE=MyISAM;`
 
 
 
-CREATE TABLE pinglun(id INT NOT NULL AUTO_INCREMENT,
+`CREATE TABLE pinglun(id INT NOT NULL AUTO_INCREMENT,
 ziyuan_id INT NOT NULL,
 user_id INT NOT NULL,
 pingfen FLOAT NOT NULL,
 text TINYTEXT NULL,
 time DATETIME NOT NULL,
-PRIMARY KEY (id))ENGINE=InnoDB;
+PRIMARY KEY (id))ENGINE=InnoDB;`
 
-CREATE TABLE user_guanzhu(id INT NOT NULL AUTO_INCREMENT,
+`CREATE TABLE user_guanzhu(id INT NOT NULL AUTO_INCREMENT,
 be_guanzhu_id INT NOT NULL,
 guanzhu_id INT NOT NULL,
 time DATETIME NOT NULL,
-PRIMARY KEY (id))ENGINE=InnoDB;
+PRIMARY KEY (id))ENGINE=InnoDB;`
 
 
 
 
 
-CREATE TABLE love(id INT NOT NULL AUTO_INCREMENT,
+`CREATE TABLE love(id INT NOT NULL AUTO_INCREMENT,
 leixing BOOL NOT NULL,
 id_1 INT NOT NULL,
 user_id INT NOT NULL,
 time DATETIME NOT NULL,
-PRIMARY KEY (id))ENGINE=InnoDB;
+PRIMARY KEY (id))ENGINE=InnoDB;`
 
-CREATE TABLE jubao(id INT NOT NULL AUTO_INCREMENT,
+`CREATE TABLE jubao(id INT NOT NULL AUTO_INCREMENT,
 leixing BOOL NOT NULL,
 id_1 INT NOT NULL,
 user_id INT NOT NULL,
 text TINYTEXT NULL,
 time DATETIME NOT NULL,
-PRIMARY KEY (id))ENGINE=InnoDB;
+PRIMARY KEY (id))ENGINE=InnoDB;`
+
 来创建一些必要的表
 12.使用命令INSERT INTO ziyuan(feilei,fenbianlv,title,zuozhe,user_id,size,format,pingfen,pinglun_num,love_num,time,way,liulan,search) VALUE(<分类>,<分辨率>,<标题>,<作者>,<作者Glass ID> ,<文件大小B>,<文件格式(视频为vid,图片为pic>,<评分等级>,0 ,0 ,<当前时间YYYY-MM-DD HH:MM:SS> ,<资源下载地址> ,<资源预览图二进制>,”1”);
 来插入一个新的资源,防止客户端因为服务端工坊无资源而报错,请自行修改<>为对应的内容
@@ -165,25 +186,35 @@ PRIMARY KEY (id))ENGINE=InnoDB;
 14.输入su glass切换到linux的glass用户
 15.再输入cd ~ 进入glass的主目录
 16.将比赛压缩包中”服务端”文件夹内的所有内容复制进linux glass用户的主目录中(/home/glass),并cd到该目录中取
+
 ![10](/pic/Glass客户端和服务端安装部署篇/10.png)
+
 17.按照https://www.jianshu.com/p/a72566e539be上的教程部署Miniconda环境,部署成功后会有(base)开头
+
 ![11](/pic/Glass客户端和服务端安装部署篇/11.png)
+
 18.使用pip3 install -r requirements.txt来安装一些glass服务端必要的依赖库
 
 19.使用vim way.py然后键入字符“i”来进入文本编辑模式
 20.使用小键盘中的上下左右定位到第21行，修改password变量中的字符串为您mysql中的glass用户密码
 21.请您再同理修改当前文件第12行至15行的变量，安装右侧注释来修改，来完成注册验证码收件邮箱的配置
+
 ![12](/pic/Glass客户端和服务端安装部署篇/12.png)
+
 19.最后的最后使用python3 main.py运行服务端主程序
 20.如果客户端能正确解析到您的服务器的话,那么就可以访问了
 21.以下的步骤您可以选择性部署,到现在位置glass客户端已经可以正常访问您的服务端了
 22.如果您拥有一个属于自己的域名可以像glass官方服务器一样将域名的名称服务器指向cloudflare(以下简称”cf”)或是将子域的CNAME解析到cf
 23.在cf中进入自己的域名,再进入DNS解析页面
+
 ![13](/pic/Glass客户端和服务端安装部署篇/13.png)
+
 24).点击右侧”添加记录”,添加一个A解析,名称为”apis”,IPV4为你的服务器公网IP,保存.
 25.然后再左侧导航栏中进入规则-页面规则,再点击”创建页面规则”
 26.输入的网址参照下图,将主域修改为您的主域,边缘缓存TTL,时间1个月,保存部署
+
 ![14](/pic/Glass客户端和服务端安装部署篇/14.png)
+
 27.大功告成,部署CDN加速主要是为了缓存一些资源,以缓解glass服务器静态资源的压力
 
 # Glass软件说明书
